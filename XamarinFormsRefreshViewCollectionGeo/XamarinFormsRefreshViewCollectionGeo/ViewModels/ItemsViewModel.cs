@@ -46,6 +46,8 @@ namespace XamarinFormsRefreshViewCollectionGeo.ViewModels
 
             try
             {
+                Location = string.Empty;
+
                 // added this
                 var request = new GeolocationRequest(GeolocationAccuracy.Medium);
                 var location = await Geolocation.GetLocationAsync();

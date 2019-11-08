@@ -34,5 +34,9 @@
 	<string>XamarinFormsRefreshViewCollectionGeo</string>
 	<key>XSAppIconAssets</key>
 	<string>Assets.xcassets/AppIcon.appiconset</string>
+
+	<key>NSLocationWhenInUseUsageDescription</key>
+	<string>Location required for test!</string>
+
 </dict>
 </plist>
