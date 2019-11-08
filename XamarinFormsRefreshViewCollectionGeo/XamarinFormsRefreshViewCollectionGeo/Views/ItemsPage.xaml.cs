@@ -42,8 +42,8 @@ namespace XamarinFormsRefreshViewCollectionGeo.Views
         {
             base.OnAppearing();
 
-            if (viewModel.Items.Count == 0)
-                viewModel.LoadItemsCommand.Execute(null);
+            // if (viewModel.Items.Count == 0) // ensure we attempt to execute on load
+            viewModel.LoadItemsCommand.Execute(null);
         }
     }
 }
