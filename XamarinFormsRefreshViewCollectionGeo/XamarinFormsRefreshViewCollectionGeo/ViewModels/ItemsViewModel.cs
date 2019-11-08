@@ -6,7 +6,6 @@ using Xamarin.Essentials;
 using Xamarin.Forms;
 
 using XamarinFormsRefreshViewCollectionGeo.Models;
-using XamarinFormsRefreshViewCollectionGeo.Views;
 
 namespace XamarinFormsRefreshViewCollectionGeo.ViewModels
 {
@@ -15,12 +14,12 @@ namespace XamarinFormsRefreshViewCollectionGeo.ViewModels
         public ObservableCollection<Item> Items { get; set; }
         public Command LoadItemsCommand { get; set; }
 
-        private string _location;
+        private DateTime? _date;
 
-        public string Location
+        public DateTime? Date
         {
-            get => _location;
-            set => SetProperty(ref _location, value);
+            get => _date;
+            set => SetProperty(ref _date, value);
         }
 
         public ItemsViewModel()
@@ -28,13 +27,6 @@ namespace XamarinFormsRefreshViewCollectionGeo.ViewModels
             Title = "Browse";
             Items = new ObservableCollection<Item>();
             LoadItemsCommand = new Command(async () => await ExecuteLoadItemsCommand());
-
-            MessagingCenter.Subscribe<NewItemPage, Item>(this, "AddItem", async (obj, item) =>
-            {
-                var newItem = item as Item;
-                Items.Add(newItem);
-                await DataStore.AddItemAsync(newItem);
-            });
         }
 
         private async Task ExecuteLoadItemsCommand()
@@ -46,20 +38,18 @@ namespace XamarinFormsRefreshViewCollectionGeo.ViewModels
 
             try
             {
-                Location = string.Empty;
-
                 // added this
                 var request = new GeolocationRequest(GeolocationAccuracy.Medium);
                 var location = await Geolocation.GetLocationAsync();
 
-                Location = $"{location.Latitude} {location.Longitude}";
+                var dt = DateTime.UtcNow;
+                // this should update on pull to refresh
+                Date = dt;
 
-                Items.Clear();
-                var items = await DataStore.GetItemsAsync(true);
-                foreach (var item in items)
+                Items.Add(new Item()
                 {
-                    Items.Add(item);
-                }
+                    Text = dt.ToString()
+                });
             }
             catch (Exception ex)
             {

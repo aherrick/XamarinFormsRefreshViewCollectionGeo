@@ -8,29 +8,15 @@
              Title="{Binding Title}"
              x:Name="BrowseItemsPage">
 
-    <ContentPage.ToolbarItems>
-        <ToolbarItem Text="Add" Clicked="AddItem_Clicked" />
-    </ContentPage.ToolbarItems>
-
     <StackLayout>
 
-        <Label Text="{Binding Location}" />
+        <Label Text="{Binding Date}" />
 
         <RefreshView IsRefreshing="{Binding IsBusy}"
                      Command="{Binding LoadItemsCommand}"
                       RefreshColor="Black">
 
-            <CollectionView HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand">
-                <CollectionView.ItemsSource>
-                    <x:Array Type="{x:Type x:String}">
-                        <x:String>First Item</x:String>
-                        <x:String>Second Item</x:String>
-                        <x:String>Third Item</x:String>
-                        <x:String>Fourth Item</x:String>
-                        <x:String>Fifth Item</x:String>
-                        <x:String>Sixth Item</x:String>
-                    </x:Array>
-                </CollectionView.ItemsSource>
+            <CollectionView HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand" ItemsSource="{Binding Items}">
 
                 <CollectionView.ItemTemplate>
                     <DataTemplate>
