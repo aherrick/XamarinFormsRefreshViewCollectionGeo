@@ -22,6 +22,14 @@ namespace XamarinFormsRefreshViewCollectionGeo.ViewModels
             set => SetProperty(ref _date, value);
         }
 
+        private bool _isRefreshing;
+
+        public bool IsRefreshing
+        {
+            get => _isRefreshing;
+            set => SetProperty(ref _isRefreshing, value);
+        }
+
         public ItemsViewModel()
         {
             Title = "Browse";
@@ -35,6 +43,7 @@ namespace XamarinFormsRefreshViewCollectionGeo.ViewModels
                 return;
 
             IsBusy = true;
+            //IsRefreshing = true;
 
             try
             {
@@ -57,6 +66,7 @@ namespace XamarinFormsRefreshViewCollectionGeo.ViewModels
             }
             finally
             {
+                IsRefreshing = false;
                 IsBusy = false;
             }
         }

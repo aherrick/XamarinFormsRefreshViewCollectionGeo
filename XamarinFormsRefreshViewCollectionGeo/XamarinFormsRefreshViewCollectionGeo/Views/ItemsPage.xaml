@@ -12,7 +12,7 @@
 
         <Label Text="{Binding Date}" />
 
-        <RefreshView IsRefreshing="{Binding IsBusy}"
+        <RefreshView IsRefreshing="{Binding IsRefreshing}"
                      Command="{Binding LoadItemsCommand}"
                       RefreshColor="Black">
 
